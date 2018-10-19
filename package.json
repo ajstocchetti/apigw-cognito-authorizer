@@ -1,0 +1,33 @@
+{
+  "name": "apigateway-cognito-authorizer",
+  "version": "0.1.0",
+  "description": "authenticates api gateway request for a cognito user pool",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test tests --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajstocchetti/apigw-cognito-authorizer.git"
+  },
+  "keywords": [
+    "aws",
+    "apigateway",
+    "cognito"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajstocchetti/apigw-cognito-authorizer/issues"
+  },
+  "homepage": "https://github.com/ajstocchetti/apigw-cognito-authorizer#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^8.3.0",
+    "jwk-to-pem": "^2.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
