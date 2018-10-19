@@ -10,13 +10,13 @@ Currently, this only serves as an authenticator (and not an authorizer). You wil
 ### Install
 
 ```bash
-npm install @turinggroup/apigateway-cognito-authorizer
+npm install apigateway-cognito-authorizer
 ```
 
 ### Instantiate
 
 ```javascript
-const cognitoAuthorizer = require('@turinggroup/apigateway-cognito-authorizer');
+const cognitoAuthorizer = require('apigateway-cognito-authorizer');
 
 // instantiate new authorizer outside of handler function
 // so that the JWT Pems can be cached between lambda invocations
