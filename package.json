@@ -1,6 +1,6 @@
 {
   "name": "apigateway-cognito-authorizer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "authenticates api gateway request for a cognito user pool",
   "main": "index.js",
   "scripts": {
