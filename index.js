@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const jwkToPem = require('jwk-to-pem');
-const rp = require('request-promise');
+const request = require('request');
 const AuthPolicy = require('./auth-policy');
 
 // see http://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html
@@ -21,7 +21,7 @@ class Authorizer {
     this._allPems = null;
     this.getPems = async function getPems() {
       if (!this._allPems) {
-        const keySet = await rp({ url: jwtKeySetURI, json: true });
+        const keySet = await get(jwtKeySetURI);
         this._allPems = pivotKeysToKid(keySet.keys);
       }
       return this._allPems;
@@ -109,3 +109,14 @@ function noAccessPolicy(event) {
 }
 
 module.exports = Authorizer;
+
+
+function get(uri) {
+  return new Promise((resolve, reject) {
+    request({uri, json: true}, function(err, response, body) {
+      if (err) reject(err);
+      else if (response.statusCode > 299) reject(response);
+      else resolve(body);
+    });
+  });
+}

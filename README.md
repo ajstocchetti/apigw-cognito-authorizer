@@ -21,7 +21,7 @@ const cognitoAuthorizer = require('apigateway-cognito-authorizer');
 // instantiate new authorizer outside of handler function
 // so that the JWT Pems can be cached between lambda invocations
 const auth = new cognitoAuthorizer({
-  userPoolId: `user pool id`,
+  userPoolId: `user_pool_id`,
   region: `us-east-1`, // or wherever your code lives...
   parseToken: function(auth) {
     return auth.split('Bearer ')[1]; // Bearer token syntax
