@@ -58,5 +58,4 @@ Returns a promise that resolves an IAM policy for the API Gateway
 
 
 ## Next steps
-0. Add authorization (see above)
-0. replace rp with regular request and promisify it here to reduce size of dependencies
+1. Add authorization (see above)

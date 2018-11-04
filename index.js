@@ -112,10 +112,11 @@ module.exports = Authorizer;
 
 
 function get(uri) {
+  // promisify request ourselves to reduce size of dependencies
   return new Promise((resolve, reject) {
     request({uri, json: true}, function(err, response, body) {
       if (err) reject(err);
-      else if (response.statusCode > 299) reject(response);
+      else if (response.statusCode > 299) reject(new Error(`Unable to download JWK from AWS`));
       else resolve(body);
     });
   });
