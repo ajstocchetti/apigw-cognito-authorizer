@@ -48,18 +48,18 @@ class Authorizer {
     const decodedJwt = jwt.decode(token, { complete: true });
     //Fail if the token is not jwt
     if (!decodedJwt) {
-      throw new Error('Missing or invalid JWT');
+      throw new Error(`Missing or invalid JWT: ${token}`);
     }
 
     const issuer = this.userPoolURI;
     //Fail if token is not from our User Pool
-    if (decodedJwt.payload['iss'] != issuer) {
-      throw new Error('Provided Token not from UserPool');
+    if (decodedJwt.payload.iss != issuer) {
+      throw new Error(`Provided Token not from correct UserPool: iss = ${decodedJwt.payload.iss}`);
     }
 
     //Reject the jwt if it's not an 'Identity Token'
-    if (decodedJwt.payload['token_use'] != 'id') {
-      throw new Error('Provided Token is not and identity token');
+    if (decodedJwt.payload.token_use != 'id') {
+      throw new Error(`Provided Token is not an identity token: ${decodedJwt.payload.token_use}`);
     }
 
     const allPems = await this.getPems();
