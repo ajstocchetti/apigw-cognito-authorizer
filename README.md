@@ -61,3 +61,4 @@ Returns a promise that resolves an IAM policy for the API Gateway
 
 ## Next steps
 1. Add authorization (see above)
+1. Enhance reporting of failed authentication. Some for of function to be invoked, similar to parseToken
