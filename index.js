@@ -11,9 +11,12 @@ class Authorizer {
     userPoolId,
     region,
     parseToken,
+    echoFail = true,
   }) {
     if (typeof parseToken === 'function') this.parseToken = parseToken;
     else this.parseToken = function(authToken) { return authToken; };
+
+    this._echoFail = !!echoFail;
 
     this.userPoolURI = `https://cognito-idp.${region}.amazonaws.com/${userPoolId}`;
     const jwtKeySetURI = `${this.userPoolURI}/.well-known/jwks.json`;
@@ -33,7 +36,7 @@ class Authorizer {
       const token = await this.parseEventToken(event);
       return allAccessPolicy(token.sub, event);
     } catch(error) {
-      console.warn(error.message);
+      if (this._echoFail) console.warn(error.message);
       return noAccessPolicy(event);
     }
   }

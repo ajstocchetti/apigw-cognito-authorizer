@@ -36,15 +36,17 @@ exports.handler = async(event, context) => await auth.processEvent(event);
 
 ```javascript
 const auth = new cognitoAuthorizer({
-  userPoolId: `user pool id`,
+  userPoolId: `user_pool_id`,
   region: `us-east-1`,
   parseToken: parseFunction,
+  echoFail: true,
 });
 ```
 Parameter: Options object with the following keys
 - userPoolId: the Amazon Cognito User Pool Id
 - region: the AWS region this APIGateway/Authorizer is running in
 - parseToken: optional - a function that takes the auth token (from the `authorizationToken` key on the lambda `event`) and returns the JWT. This is useful if the JWT is passed in as a bearer token and the "Bearer " needs to be stripped off. If no function is supplied, the full `event.authorizationToken` will be used as the JWT.
+- echoFail: optional - boolean - in the event the request is not authorized, determines if the error with the JWT is logged to the console. Defaults to true - the failure reason is logged.
 
 The instantiation of a new Authorizer triggers the downloading of JWKs from AWS. These JWKs are cached in memory to speed up the processing of any individual invocation of this lambda function. For this reason, it is encouraged to instantiate the Authorizer outside of the lambda handler so that the JWKs are cached between lambda invocations (provided the same container is used).
 
